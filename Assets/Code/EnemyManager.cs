@@ -4,12 +4,14 @@ namespace Assets.Code
     internal class EnemyManager
     {
         List<Enemy> _enemys = new List<Enemy>();
-        internal void initialize()
+        ItemManager _item_manager;
+        internal void initialize(ItemManager item_manager)
         {
+            _item_manager = item_manager;
             for (int i = 0; i < 10; i++)
             {
                 Enemy enemy = new Enemy();
-                enemy.initialize();
+                enemy.initialize(_item_manager);
                 _enemys.Add(enemy);
             }
         }
