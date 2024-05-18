@@ -34,8 +34,7 @@ namespace Assets.Code
             _item_manager = item_manager;
             _player = player;
             _bullet_manager = bullet_manager;
-            _type = TYPE.FORT;
-            //_type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
+            _type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Enemy");
             UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, SampleScene.Canvas.transform);
             _object = instance;
@@ -241,7 +240,7 @@ namespace Assets.Code
         {
             UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
             UnityEngine.Vector2 pos = _object.transform.localPosition;
-            UnityEngine.Vector2 vec = (player_pos - pos).normalized; // ベクトルを角度に変換します
+            UnityEngine.Vector2 vec = (player_pos - pos).normalized;
             float angle = UnityEngine.Mathf.Atan2(vec.x, vec.y) * UnityEngine.Mathf.Rad2Deg;
             _bullet_manager.createBullet(_object.transform.position , angle, 1, 4, BULLET_TYPE.NORMAL, BULLET_FACTION.ENEMY);
         }
