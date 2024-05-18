@@ -9,6 +9,7 @@ namespace Assets.Code
         UnityEngine.GameObject _object;
         BulletManager _bullet_mng;
 
+        private int _hp = 10;
         private float _speed = 10;
         private float _bullet_speed = 20f;
         private float _bullet_angle = 90;
@@ -82,6 +83,11 @@ namespace Assets.Code
 
         internal void damage(int damage)
         {
+            _hp -= damage;
+            if (_hp > 0)
+            {
+                return;
+            }
             //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ— or “G‚É“–‚½‚Á‚½Û‚Ìˆ—
             _object.SetActive(false);
         }
