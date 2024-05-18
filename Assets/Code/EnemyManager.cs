@@ -5,13 +5,15 @@ namespace Assets.Code
     {
         List<Enemy> _enemys = new List<Enemy>();
         ItemManager _item_manager;
-        internal void initialize(ItemManager item_manager)
+        Player _player;
+        internal void initialize(ItemManager item_manager,Player player)
         {
             _item_manager = item_manager;
+            _player = player;
             for (int i = 0; i < 10; i++)
             {
                 Enemy enemy = new Enemy();
-                enemy.initialize(_item_manager);
+                enemy.initialize(_item_manager,_player);
                 _enemys.Add(enemy);
             }
         }
