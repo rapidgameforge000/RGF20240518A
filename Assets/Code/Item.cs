@@ -6,6 +6,7 @@ namespace Assets.Code
         {
             POWER_UP,
             SPEED_UP,
+            DIFFUSION,
             MAX,
         };
 
@@ -26,6 +27,11 @@ namespace Assets.Code
                 case TYPE.SPEED_UP:
                     name = "item_speed_up";
                     _type = TYPE.SPEED_UP;
+                    break;
+
+                case TYPE.DIFFUSION:
+                    name = "item_diffusion";
+                    _type = TYPE.DIFFUSION;
                     break;
             }
 
