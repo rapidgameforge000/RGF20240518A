@@ -2,11 +2,16 @@ using System.Collections.Generic;
 
 namespace Assets.Code
 {
-    internal class ItemManager : UnityEngine.MonoBehaviour
+    internal class ItemManager
     {
         private UnityEngine.GameObject _object;
         private Player _player;
         private List<Item> items = new List<Item>();
+
+        enum TYPE { 
+            POWER_UP,
+            SPEED_UP,
+        };
 
         internal void initialize( Player player )
         {
