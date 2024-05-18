@@ -16,7 +16,13 @@ namespace Assets.Code
 
         internal void process()
         {
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow)) {
+            playerMove();
+        }
+
+        private void playerMove()
+        {
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow))
+            {
                 _object.transform.position += new UnityEngine.Vector3(0, _speed, 0);
             }
             if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow))
@@ -37,9 +43,9 @@ namespace Assets.Code
             }
         }
 
-        internal UnityEngine.Vector3 GetPlayerPosition()
+        internal UnityEngine.Vector2 GetPlayerPosition()
         {
-            return _object.transform.position;
+            return _object.transform.localPosition;
         }
     }
 }
