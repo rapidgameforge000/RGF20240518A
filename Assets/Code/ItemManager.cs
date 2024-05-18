@@ -15,9 +15,9 @@ namespace Assets.Code
             _object = instance;
             _player = player;
 
-            for (int i = 0; i < 10; i++) {
-                create( new UnityEngine.Vector2( UnityEngine.Random.Range( 0, 100 ), UnityEngine.Random.Range(0, 100) ) );
-            }
+            //for (int i = 0; i < 10; i++) {
+            //    create( new UnityEngine.Vector2( UnityEngine.Random.Range( 0, 100 ), UnityEngine.Random.Range(0, 100) ) );
+            //}
         }
 
         internal void process() {
