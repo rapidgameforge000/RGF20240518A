@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Assets.Code
 {
     internal class Enemy
@@ -12,17 +14,19 @@ namespace Assets.Code
         const float SIZE = 40;
 
         ItemManager _item_manager;
+        Player _player;
         private UnityEngine.GameObject _object;
         private double _hp;
         bool _isAlive;
         TYPE _type;
         float _speed;
 
-        internal void initialize(ItemManager item_manager)
+        internal void initialize(ItemManager item_manager,Player player)
         {
             _item_manager = item_manager;
-            _type = TYPE.ADULATION;
-            //_type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
+            _player = player;
+            //_type = TYPE.ADULATION;
+            _type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Enemy");
             UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, SampleScene.Canvas.transform);
             _object = instance;
@@ -73,6 +77,7 @@ namespace Assets.Code
                     break;
             }
             UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
+            _speed = (float)(5 + UnityEngine.Random.Range(5, 10)) / 4;
             _object.transform.localPosition = pos;
         }
 
@@ -84,6 +89,7 @@ namespace Assets.Code
                     processFallType();
                     break;
                 case TYPE.ADULATION:
+                    processAdulationType();
                     break;
             }
         }
@@ -92,6 +98,16 @@ namespace Assets.Code
         {
             UnityEngine.Vector2 pos = _object.transform.localPosition;
             pos += new UnityEngine.Vector2(0.0f, -_speed);
+            _object.transform.localPosition = pos;
+        }
+
+        private void processAdulationType()
+        {
+            UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
+            UnityEngine.Vector2 pos = _object.transform.localPosition;
+            UnityEngine.Vector2 vec = (player_pos - pos).normalized;
+            UnityEngine.Vector2 move_vec = new UnityEngine.Vector2(vec.x * _speed, vec.y * _speed);
+            pos += move_vec;
             _object.transform.localPosition = pos;
         }
 
