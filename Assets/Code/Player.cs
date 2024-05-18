@@ -15,7 +15,6 @@ namespace Assets.Code
         private float _bullet_angle = 90;
         private int _bullet_damage = 1;
         private BULLET_TYPE _bullet_type = BULLET_TYPE.NORMAL;
-        private bool _dead = false;
         internal void initialize(BulletManager bulletManager)
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("player");
@@ -94,7 +93,7 @@ namespace Assets.Code
 
         internal bool isDead()
         {
-            return _dead;
+            return _hp <= 0;
         }
 
         internal void touchedItem(Item item)
