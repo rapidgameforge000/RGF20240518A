@@ -10,15 +10,17 @@ namespace Assets.Code
 
         const double START_HP = 5;
 
+        ItemManager _item_manager;
         private UnityEngine.GameObject _object;
         private double _hp;
         bool _isAlive;
 
-        internal void initialize()
+        internal void initialize(ItemManager item_manager)
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Enemy");
             UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab);
             _object = instance;
+            _item_manager= item_manager;
             float pos_x = UnityEngine.Random.Range(-960, 960);
             float pos_y = UnityEngine.Random.Range(-540, 540);
             UnityEngine.Vector2 pos= new UnityEngine.Vector2(pos_x, pos_y);
@@ -43,6 +45,7 @@ namespace Assets.Code
             if (_hp < 0)
             {
                 _isAlive= false;
+                _item_manager.create(_object.transform.localPosition);
             }
         }
 
