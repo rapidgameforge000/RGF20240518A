@@ -21,9 +21,10 @@ namespace Assets.Code
             _item_mgr = new ItemManager();
             _player = new Player();
             _player.initialize(_bullet_mgr);
-            _bullet_mgr.initialize(_enemy_manager);
             _enemy_manager.initialize(_item_mgr, _player, _bullet_mgr);
+            _bullet_mgr.initialize(_enemy_manager, _player);
             _item_mgr.initialize( _player );
+            _player.initialize(_bullet_mgr);
         }
 
         private void Update()

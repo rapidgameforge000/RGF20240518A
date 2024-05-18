@@ -25,39 +25,54 @@ namespace Assets.Code
         }
 
         internal void process() {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].process();
+            }
             doHit();
             doCleanUp();
         }
 
-        internal void create( UnityEngine.Vector2 pos ) {
+        internal void create(UnityEngine.Vector2 pos)
+        {
             Item item = new Item();
-            item.initialize( _object.transform, pos );
+            item.initialize(_object.transform, pos);
             _items.Add(item);
         }
 
-        private void doHit( ) {
-            for (int i = 0; i < _items.Count; i++) {
-                UnityEngine.Vector2 distance = _items[i].getPosition() - _player.GetPlayerPosition();
-                int hit_distance = PLAYER_RADIUS + ITEM_RADIUS;
-                int sqr_distance = ( int )distance.sqrMagnitude;
-                int sqr_hit_distance = hit_distance * hit_distance;
-                if (sqr_distance < sqr_hit_distance)
-                {
-                    _items[i].death();
-                }
-            }       
-        }
-
-        private void doCleanUp() {
-            for (int i = 0; i < _items.Count; i++) {
+        void doMove() {
+            for (int i = 0; i < _items.Count; i++)
+            {
                 if (!_items[i].isAlive())
                 {
                     _items[i].deleteObject();
                     _items[i] = null;
-                } 
+                }
+            }
+        }
+        private void doCleanUp()
+        {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (!_items[i].isAlive())
+                {
+                    _items[i].deleteObject();
+                    _items[i] = null;
+                }
             }
 
-            _items.RemoveAll(a => a == null); 
+            _items.RemoveAll(a => a == null);
+        }
+
+        private void doHit()
+        {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (_player.isHit(_items[i].getPosition(), ITEM_RADIUS)) {
+                    _player.touchedItem(_items[ i ] );
+                    _items[i].death();
+                }
+            }
         }
     }
 }
