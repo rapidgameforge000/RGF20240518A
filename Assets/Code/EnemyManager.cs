@@ -19,7 +19,7 @@ namespace Assets.Code
 
         }
 
-        internal bool isHit(UnityEngine.Vector2 pos,int damage )
+        internal bool doHit(UnityEngine.Vector2 pos,int damage )
         {
             return true;
         }
