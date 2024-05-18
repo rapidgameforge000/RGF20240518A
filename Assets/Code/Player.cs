@@ -96,6 +96,11 @@ namespace Assets.Code
             return _hp <= 0;
         }
 
+        internal int getHp()
+        {
+            return _hp;
+        }
+
         internal void touchedItem(Item item)
         {
             switch(item.getType())
