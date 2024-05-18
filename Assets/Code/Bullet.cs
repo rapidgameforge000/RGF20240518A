@@ -1,22 +1,20 @@
-using UnityEngine;
-using System.Collections.Generic;
-
-public class Bullet : MonoBehaviour
+namespace Assets.Code
 {
-    private GameObject _prefab = null;
-    private List<GameObject> _bullet = null;
-    void Start()
+    public class Bullet
     {
-        _prefab = Resources.Load<GameObject>("Bullet");
-    }
+        private UnityEngine.GameObject _gobj;
+        private float _speed;
 
-    void Update()
-    {
-        
-    }
+        public Bullet(UnityEngine.GameObject gobj, float speed)
+        {
+            _gobj = gobj;
+            _speed = speed;
+        }
 
-    public void CreateBullet(Vector3 position, Quaternion rotation)
-    {
-        _bullet.Add(GameObject.Instantiate<GameObject>(_prefab, position, rotation));
+
+        public void Update()
+        {
+            _gobj.transform.position += _gobj.transform.rotation * UnityEngine.Vector3.up * _speed;
+        }
     }
 }
