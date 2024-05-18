@@ -21,6 +21,7 @@ namespace Assets.Code
             _enemy_mgr = enemy_mgr;
             _player = player;
             _dead = false;
+            gobj.GetComponent<UnityEngine.UI.Image>().color = faction == BULLET_FACTION.PLAYER ? UnityEngine.Color.white : UnityEngine.Color.blue;
         }
 
         internal void process()
