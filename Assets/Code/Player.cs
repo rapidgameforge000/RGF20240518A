@@ -9,7 +9,7 @@ namespace Assets.Code
         internal void initialize(BulletManager bulletManager)
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("player");
-            UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, SampleScene.Canvas.transform);
+            UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, UnityEngine.Vector3.zero, UnityEngine.Quaternion.AngleAxis(90, UnityEngine.Vector3.back), SampleScene.Canvas.transform);
             _object = instance;
             _bullet_mng = bulletManager;
         }
@@ -41,7 +41,5 @@ namespace Assets.Code
         {
             return _object.transform.position;
         }
-
-
     }
 }
