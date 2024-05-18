@@ -11,13 +11,18 @@ namespace Assets.Code
             UnityEngine.QualitySettings.vSyncCount = 0;
             UnityEngine.Application.targetFrameRate = 30;
             _enemy_manager = new EnemyManager();
+            _player = new Player();
             _enemy_manager.initialize();
             _bullet_mgr = new BulletManager();
+            _item_mgr = new ItemManager();
             _bullet_mgr.initialize(_enemy_manager);
             _player = new Player();
             _player.initialize(_bullet_mgr);
             _item_mgr = new ItemManager();
             _item_mgr.initialize();
+            _player.initialize();
+            _enemy_manager.initialize(_item_mgr);
+            _item_mgr.initialize( _player );
         }
 
         private void Update()
@@ -27,7 +32,7 @@ namespace Assets.Code
 
         private void doProcess()
         {
-            //_enemy_manager.process();
+            _enemy_manager.process();
             _bullet_mgr.process();
             _item_mgr.process();
             _player.process();

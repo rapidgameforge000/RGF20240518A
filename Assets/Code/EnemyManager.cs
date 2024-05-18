@@ -4,29 +4,31 @@ namespace Assets.Code
     internal class EnemyManager
     {
         List<Enemy> _enemys = new List<Enemy>();
-        internal void initialize()
+        ItemManager _item_manager;
+        internal void initialize(ItemManager item_manager)
         {
+            _item_manager = item_manager;
             for (int i = 0; i < 10; i++)
             {
                 Enemy enemy = new Enemy();
-                enemy.initialize();
+                enemy.initialize(_item_manager);
                 _enemys.Add(enemy);
             }
         }
 
         internal void process()
         {
-            //doCleanUp();
+            doCleanUp();
         }
 
         private void doCleanUp()
         {
             for(int i = 0; i < _enemys.Count; i++)
             {
-                if (_enemys[i].isAlive())
+                if (!_enemys[i].isAlive())
                 {
-                    _enemys[i] = null;
                     _enemys[i].deleteObject();
+                    _enemys[i] = null;
                 }
             }
             _enemys.RemoveAll(a => a == null);
