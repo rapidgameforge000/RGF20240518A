@@ -8,6 +8,7 @@ namespace Assets.Code
             BULLET_SPEED_UP,
             PLAYER_SPEED_UP,
             DIFFUSION,
+            HEAL,
             MAX,
         };
 
@@ -36,6 +37,10 @@ namespace Assets.Code
                 case TYPE.DIFFUSION:
                     name = "item_diffusion";
                     _type = TYPE.DIFFUSION;
+                    break;
+                case TYPE.HEAL:
+                    name = "item_heal";
+                    _type = TYPE.HEAL;
                     break;
             }
 

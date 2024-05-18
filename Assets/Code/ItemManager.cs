@@ -9,7 +9,7 @@ namespace Assets.Code
         private List<Item> _items = new List<Item>();
 
         private const int ITEM_RADIUS = 40;
-        private const int PROBABILITY = 3;
+        private const int PROBABILITY = 2;
 
         internal void initialize( Player player )
         {
