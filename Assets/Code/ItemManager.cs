@@ -12,10 +12,20 @@ namespace Assets.Code
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item_manager");
             UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
             _object = instance;
+        }
 
+        public void process() {
+            doHit();
+        }
+
+        public void create( UnityEngine.Vector2 pos ) {
             Item item = new Item();
-            item.initialize();
+            item.initialize( _object.transform, pos );
             items.Add(item);
-        } 
+        }
+
+        private void doHit( ) { 
+            
+        }
     }
 }

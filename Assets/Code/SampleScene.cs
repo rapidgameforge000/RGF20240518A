@@ -26,6 +26,7 @@ namespace Assets.Code
         {
             _enemy.process();
             _bullet_mgr.process();
+            _item_mgr.process();
         }
     }
 }
