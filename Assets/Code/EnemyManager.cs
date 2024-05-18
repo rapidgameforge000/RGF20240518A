@@ -5,23 +5,34 @@ namespace Assets.Code
     {
         List<Enemy> _enemys = new List<Enemy>();
         ItemManager _item_manager;
+        BulletManager _bullet_manager;
         Player _player;
-        internal void initialize(ItemManager item_manager,Player player)
+        int _frame_count;
+
+        internal void initialize(ItemManager item_manager,Player player,BulletManager bullet_manager)
         {
             _item_manager = item_manager;
             _player = player;
-            for (int i = 0; i < 10; i++)
-            {
-                Enemy enemy = new Enemy();
-                enemy.initialize(_item_manager,_player);
-                _enemys.Add(enemy);
-            }
+            _bullet_manager = bullet_manager;
+            _frame_count = 0;
         }
 
         internal void process()
         {
+            doCreate();
             doProcess();
             doCleanUp();
+            _frame_count++;
+        }
+
+        private void doCreate()
+        {
+            if (_frame_count % 60 == 0)
+            {
+                Enemy enemy = new Enemy();
+                enemy.initialize(_item_manager, _player, _bullet_manager);
+                _enemys.Add(enemy);
+            }
         }
 
         private void doProcess()

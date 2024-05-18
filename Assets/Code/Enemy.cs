@@ -7,24 +7,30 @@ namespace Assets.Code
         enum TYPE
         {
             FALL,
+            UP,
             ADULATION,
             MAX,
         };
+        const float ADD_X_VEL = 0.2f;
         const double START_HP = 5;
         const float SIZE = 40;
 
         ItemManager _item_manager;
         Player _player;
+        BulletManager _bullet_manager;
         private UnityEngine.GameObject _object;
         private double _hp;
         bool _isAlive;
+        int _frame_cont;
         TYPE _type;
         float _speed;
+        UnityEngine.Vector2 _vel;
 
-        internal void initialize(ItemManager item_manager,Player player)
+        internal void initialize(ItemManager item_manager,Player player,BulletManager bullet_manager)
         {
             _item_manager = item_manager;
             _player = player;
+            _bullet_manager = bullet_manager;
             //_type = TYPE.ADULATION;
             _type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Enemy");
@@ -35,19 +41,38 @@ namespace Assets.Code
                 case TYPE.FALL:
                     initFallType();
                     break;
+                case TYPE.UP:
+                    initUpType();
+                    break;
                 case TYPE.ADULATION:
                     initAdulationType();
                     break;
             }
             _hp = START_HP;
             _isAlive = true;
+            _frame_cont =0;
         }
 
         private void initFallType()
         {
-            float pos_x = UnityEngine.Random.Range(-(960 - SIZE), 960 - SIZE);
+            UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
+            float min_x = player_pos.x;
+            float max_x = 960 - SIZE;
+            float pos_x = UnityEngine.Random.Range(min_x,max_x) ;
             float pos_y = 540 + SIZE;
-            _speed = (float)(2 + UnityEngine.Random.Range(5, 10)) / 2;
+            UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
+            _speed = (float)(2 + UnityEngine.Random.Range(5, 10));
+            _object.transform.localPosition = pos;
+        }
+
+        private void initUpType()
+        {
+            UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
+            float min_x = player_pos.x;
+            float max_x = 960 - SIZE;
+            float pos_x = UnityEngine.Random.Range(min_x, max_x);
+            float pos_y = -(540 + SIZE);
+            _speed = (float)(2 + UnityEngine.Random.Range(5, 10));
             UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
             _object.transform.localPosition = pos;
         }
@@ -77,7 +102,7 @@ namespace Assets.Code
                     break;
             }
             UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
-            _speed = (float)(5 + UnityEngine.Random.Range(5, 10)) / 4;
+            _speed = (float)(5 + UnityEngine.Random.Range(5, 10)) / 3;
             _object.transform.localPosition = pos;
         }
 
@@ -88,17 +113,40 @@ namespace Assets.Code
                 case TYPE.FALL:
                     processFallType();
                     break;
+                case TYPE.UP:
+                    processUpType();
+                    break;
                 case TYPE.ADULATION:
                     processAdulationType();
                     break;
             }
+            _frame_cont = 0;
         }
 
         private void processFallType()
         {
             UnityEngine.Vector2 pos = _object.transform.localPosition;
-            pos += new UnityEngine.Vector2(0.0f, -_speed);
+            _vel.x += -ADD_X_VEL;
+            _vel.y = -_speed;
+            pos += _vel;
             _object.transform.localPosition = pos;
+            if (_object.transform.localPosition.x <= -(960 + SIZE))
+            {
+                _isAlive = false;
+            }
+        }
+
+        private void processUpType()
+        {
+            UnityEngine.Vector2 pos = _object.transform.localPosition;
+            _vel.x += -ADD_X_VEL;
+            _vel.y = _speed;
+            pos += _vel;
+            _object.transform.localPosition = pos;
+            if (_object.transform.localPosition.x <= -(960 + SIZE))
+            {
+                _isAlive = false;
+            }
         }
 
         private void processAdulationType()
@@ -106,8 +154,8 @@ namespace Assets.Code
             UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
             UnityEngine.Vector2 pos = _object.transform.localPosition;
             UnityEngine.Vector2 vec = (player_pos - pos).normalized;
-            UnityEngine.Vector2 move_vec = new UnityEngine.Vector2(vec.x * _speed, vec.y * _speed);
-            pos += move_vec;
+            _vel = new UnityEngine.Vector2(vec.x * _speed, vec.y * _speed);
+            pos += _vel;
             _object.transform.localPosition = pos;
         }
 
