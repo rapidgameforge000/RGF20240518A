@@ -18,7 +18,16 @@ namespace Assets.Code
 
         internal void process()
         {
+            doProcess();
             doCleanUp();
+        }
+
+        private void doProcess()
+        {
+            for (int i = 0; i < _enemys.Count; i++)
+            {
+                _enemys[i].process();
+            }
         }
 
         private void doCleanUp()
@@ -39,7 +48,7 @@ namespace Assets.Code
             bool hit = false; ;
             for (int i = 0; i < _enemys.Count; i++)
             {
-                if (_enemys[i].isHit(pos))
+                  if (_enemys[i].isHit(pos))
                 {
                     _enemys[i].hit(damage);
                     hit = true;

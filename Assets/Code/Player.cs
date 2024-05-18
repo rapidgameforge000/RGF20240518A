@@ -39,7 +39,13 @@ namespace Assets.Code
             }
             if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Space))
             {
-                _bullet_mng.createBullet(_object.transform.position);
+                _bullet_mng.createBullet(
+                    position: _object.transform.position,
+                    damage: 1,                      //íeÇÃÉ_ÉÅÅ[ÉWó 
+                    speed: 20f,                     //íeÇÃë¨ìx
+                    type: BULLET_TYPE.NORMAL,       //íeÇÃéÌóﬁ:í èÌíe or ägéUíe
+                    faction: BULLET_FACTION.PLAYER  //êwâc:Player or Enemy
+                    );
             }
         }
 
