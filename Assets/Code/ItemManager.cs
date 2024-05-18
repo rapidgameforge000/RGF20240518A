@@ -8,17 +8,16 @@ namespace Assets.Code
         private Player _player;
         private List<Item> items = new List<Item>();
 
-        enum TYPE { 
-            POWER_UP,
-            SPEED_UP,
-        };
-
         internal void initialize( Player player )
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item_manager");
             UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
             _object = instance;
             _player = player;
+
+            for (int i = 0; i < 10; i++) {
+                create( new UnityEngine.Vector2( UnityEngine.Random.Range( 0, 100 ), UnityEngine.Random.Range(0, 100) ) );
+            }
         }
 
         internal void process() {
