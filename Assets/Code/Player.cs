@@ -7,8 +7,11 @@ namespace Assets.Code
         const int SIZE = 80;
 
         UnityEngine.GameObject _object;
-        private float _speed = 10;
         BulletManager _bullet_mng;
+
+        private float _speed = 10;
+        private float _bullet_speed = 20f;
+        private float _bullet_angle = 90;
 
         internal void initialize(BulletManager bulletManager)
         {
@@ -45,8 +48,9 @@ namespace Assets.Code
             {
                 _bullet_mng.createBullet(
                     position: _object.transform.position,
+                    angle: _bullet_angle,                      //íeÇÃî≠éÀäpìx
                     damage: 1,                      //íeÇÃÉ_ÉÅÅ[ÉWó 
-                    speed: 20f,                     //íeÇÃë¨ìx
+                    speed: _bullet_speed,                     //íeÇÃë¨ìx
                     type: BULLET_TYPE.NORMAL,       //íeÇÃéÌóﬁ:í èÌíe or ägéUíe
                     faction: BULLET_FACTION.PLAYER  //êwâc:Player or Enemy
                     );
@@ -85,7 +89,7 @@ namespace Assets.Code
             switch(item.getType())
             {
                 case Item.TYPE.POWER_UP:
-
+                    _bullet_speed = 40f;
                     break;
                 case Item.TYPE.SPEED_UP:
                     _speed += 5;

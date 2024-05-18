@@ -19,28 +19,8 @@ namespace Assets.Code
             for (int i = 0; i < _bullets.Count; i++)
             {
                 _bullets[i].process();
-                bool isDestroy = false;
-                if (_bullets[i].getFaction() == BULLET_FACTION.PLAYER)
+                if (_bullets[i].isDead())
                 {
-                    //エネミーに当たる
-                    if (_enemy_mgr.doHit(_bullets[i].getPosition2d(), _bullets[i].getDamage()))
-                    {
-                        isDestroy = true;
-                    }
-                }
-                else if (_bullets[i].getFaction() == BULLET_FACTION.ENEMY)
-                {
-                    //プレイヤーに当たる
-                    if (_player.isHit(_bullets[i].getPosition2d(), _bullets[i].getRadius()))
-                    {
-                        _player.damage(_bullets[i].getDamage());
-                        isDestroy = true;
-                    }
-                }
-
-                if (isDestroy)
-                {
-                    _bullets[i].destroy();
                     _bullets.Remove(_bullets[i]);
                     i--;
                 }
@@ -52,12 +32,12 @@ namespace Assets.Code
             switch (type)
             {
                 case BULLET_TYPE.NORMAL:
-                    _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction));
+                    _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction, _enemy_mgr, _player));
                     break;
                 case BULLET_TYPE.DIFFUSION:
                     for (int i = 0; i < 5; i++)
                     {
-                        _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle - 20 + i * 10, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction));
+                        _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle - 20 + i * 10, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction, _enemy_mgr, _player));
                     }
                     break;
             }
