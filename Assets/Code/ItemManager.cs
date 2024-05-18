@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ItemManager : MonoBehaviour
+namespace Assets.Code.Item
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    // Update is called once per frame
-    void Update()
+    public class ItemManager : MonoBehaviour
     {
-        
+        private UnityEngine.GameObject _object;
+
+        public void initialize()
+        {
+
+        }
     }
 }
