@@ -9,7 +9,7 @@ namespace Assets.Code
         private List<Item> _items = new List<Item>();
 
         private int PLAYER_RADIUS = 40;
-        private int ITEM_RADIUS = 20;
+        private int ITEM_RADIUS = 40;
 
         internal void initialize( Player player )
         {
