@@ -11,8 +11,7 @@ namespace Assets.Code
             _speed = speed;
         }
 
-
-        public void Update()
+        internal void process()
         {
             _gobj.transform.position += _gobj.transform.rotation * UnityEngine.Vector3.up * _speed;
         }
