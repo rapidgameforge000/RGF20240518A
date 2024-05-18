@@ -25,7 +25,7 @@ namespace Assets.Code
         }
 
         internal void process() {
-            doHit();
+            //doHit();
             doCleanUp();
         }
 
@@ -35,18 +35,18 @@ namespace Assets.Code
             _items.Add(item);
         }
 
-        private void doHit( ) {
-            for (int i = 0; i < _items.Count; i++) {
-                UnityEngine.Vector2 distance = _items[i].getPosition() - _player.GetPlayerPosition();
-                int hit_distance = PLAYER_RADIUS + ITEM_RADIUS;
-                int sqr_distance = ( int )distance.sqrMagnitude;
-                int sqr_hit_distance = hit_distance * hit_distance;
-                if (sqr_distance < sqr_hit_distance)
-                {
-                    _items[i].death();
-                }
-            }       
-        }
+        //private void doHit( ) {
+        //    for (int i = 0; i < _items.Count; i++) {
+        //        UnityEngine.Vector2 distance = _items[i].getPosition() - _player.GetPlayerPosition();
+        //        int hit_distance = PLAYER_RADIUS + ITEM_RADIUS;
+        //        int sqr_distance = ( int )distance.sqrMagnitude;
+        //        int sqr_hit_distance = hit_distance * hit_distance;
+        //        if (sqr_distance < sqr_hit_distance)
+        //        {
+        //            _items[i].death();
+        //        }
+        //    }       
+        //}
 
         private void doCleanUp() {
             for (int i = 0; i < _items.Count; i++) {
