@@ -10,9 +10,6 @@ namespace Assets.Code
         {
             _enemy_mgr = enemy_mgr;
             _prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Bullet");
-
-            //Test Code
-            createBullet(UnityEngine.Vector3.zero);
         }
 
         internal void process()

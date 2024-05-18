@@ -12,10 +12,10 @@ namespace Assets.Code
             UnityEngine.Application.targetFrameRate = 30;
             _enemy_manager = new EnemyManager();
             _enemy_manager.initialize();
-            _player = new Player();
-            _player.initialize();
             _bullet_mgr = new BulletManager();
             _bullet_mgr.initialize(_enemy_manager);
+            _player = new Player();
+            _player.initialize(_bullet_mgr);
             _item_mgr = new ItemManager();
             _item_mgr.initialize();
         }
