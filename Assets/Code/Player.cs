@@ -1,7 +1,11 @@
+using System.Drawing;
+
 namespace Assets.Code
 {
     internal class Player
     {
+        const int SIZE = 80;
+
         UnityEngine.GameObject _object;
         private float _speed = 10;
         BulletManager _bullet_mng;
@@ -21,19 +25,19 @@ namespace Assets.Code
 
         private void playerMove()
         {
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow) && _object.transform.localPosition.y < 480)
             {
                 _object.transform.position += new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow) && _object.transform.localPosition.y > -480)
             {
                 _object.transform.position -= new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow) && _object.transform.localPosition.x > -900)
             {
                 _object.transform.position -= new UnityEngine.Vector3(_speed, 0, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow) && _object.transform.localPosition.x < 900)
             {
                 _object.transform.position += new UnityEngine.Vector3(_speed, 0, 0);
             }
@@ -52,6 +56,28 @@ namespace Assets.Code
         internal UnityEngine.Vector2 GetPlayerPosition()
         {
             return _object.transform.localPosition;
+        }
+
+
+        internal bool isHit(UnityEngine.Vector2 pos, float radius)
+        {
+            bool hit = false;
+            UnityEngine.Vector2 my_pos = _object.transform.localPosition;
+            UnityEngine.Vector2 distance = pos - my_pos;
+            float hit_range = SIZE + radius;
+            float sqr_distance = distance.sqrMagnitude;
+            float sqr_hit_distance = hit_range * hit_range;
+            if (sqr_distance < sqr_hit_distance)
+            {
+                hit = true;
+            }
+            return hit;
+        }
+
+        internal void damage(int damage)
+        {
+            //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ— or “G‚É“–‚½‚Á‚½Û‚Ìˆ—
+            _object.SetActive(false);
         }
     }
 }

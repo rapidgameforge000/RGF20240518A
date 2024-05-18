@@ -7,9 +7,10 @@ namespace Assets.Code
         private EnemyManager _enemy_mgr = null;
         private Player _player = null;
 
-        internal void initialize(EnemyManager enemy_mgr)
+        internal void initialize(EnemyManager enemy_mgr, Player player)
         {
             _enemy_mgr = enemy_mgr;
+            _player = player;
             _prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Bullet");
         }
 
@@ -30,6 +31,11 @@ namespace Assets.Code
                 else if (_bullets[i].getFaction() == BULLET_FACTION.ENEMY)
                 {
                     //ÉvÉåÉCÉÑÅ[Ç…ìñÇΩÇÈ
+                    if (_player.isHit(_bullets[i].getPosition2d(), _bullets[i].getRadius()))
+                    {
+                        _player.damage(_bullets[i].getDamage());
+                        isDestroy = true;
+                    }
                 }
 
                 if (isDestroy)

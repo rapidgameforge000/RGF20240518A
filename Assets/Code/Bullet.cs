@@ -30,6 +30,11 @@ namespace Assets.Code
             return _damage;
         }
 
+        internal int getRadius()
+        {
+            return 20;
+        }
+
         internal BULLET_FACTION getFaction()
         {
             return _faction;
