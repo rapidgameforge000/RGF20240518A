@@ -4,7 +4,7 @@ namespace Assets.Code
 {
     internal class Player
     {
-        const int SIZE = 80;
+        const int SIZE = 60;
 
         UnityEngine.GameObject _object;
         BulletManager _bullet_mng;
@@ -101,10 +101,10 @@ namespace Assets.Code
             switch(item.getType())
             {
                 case Item.TYPE.BULLET_SPEED_UP:
-                    _bullet_speed = 40f;
+                    _bullet_speed += 20f;
                     break;
                 case Item.TYPE.PLAYER_SPEED_UP:
-                    _speed += 5;
+                    _speed += 20;
                     break;
                 case Item.TYPE.DIFFUSION:
                     _bullet_type = BULLET_TYPE.DIFFUSION;
@@ -112,6 +112,14 @@ namespace Assets.Code
                 case Item.TYPE.POWER_UP:
                     _bullet_damage += 3;
                     break;
+            }
+            if (_bullet_speed > 40)
+            {
+                _bullet_speed = 40;
+            }
+            if (_speed > 40)
+            {
+                _bullet_speed = 40;
             }
         }
     }
