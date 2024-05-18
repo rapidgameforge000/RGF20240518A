@@ -30,7 +30,7 @@ namespace Assets.Code
             if (_faction == BULLET_FACTION.PLAYER)
             {
                 //エネミーに当たる
-                if (_enemy_mgr.doHit(getPosition2d(), _damage))
+                if (_enemy_mgr.doHit(getPosition(), _damage))
                 {
                     _dead = true;
                 }
@@ -38,7 +38,7 @@ namespace Assets.Code
             else if (_faction == BULLET_FACTION.ENEMY)
             {
                 //プレイヤーに当たる
-                if (_player.isHit(getPosition2d(), SIZE))
+                if (_player.isHit(getPosition(), SIZE))
                 {
                     _player.damage(_damage);
                     _dead = true;
@@ -54,12 +54,7 @@ namespace Assets.Code
         {
             return _dead;
         }
-
-        internal UnityEngine.Vector3 getPosition()
-        {
-            return _gobj.transform.position;
-        }
-        internal UnityEngine.Vector2 getPosition2d()
+        internal UnityEngine.Vector2 getPosition()
         {
             return _gobj.transform.localPosition;
         }
