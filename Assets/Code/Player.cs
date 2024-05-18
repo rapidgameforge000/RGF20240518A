@@ -112,7 +112,7 @@ namespace Assets.Code
                 case Item.TYPE.POWER_UP:
                     _bullet_damage += 3;
                     break;
-                case Item.TYPE.HEEL:
+                case Item.TYPE.HEAL:
                     _hp += 5;
                     break;
             }
