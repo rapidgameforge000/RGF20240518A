@@ -25,19 +25,19 @@ namespace Assets.Code
 
         private void playerMove()
         {
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow) && _object.transform.localPosition.y < 480)
             {
                 _object.transform.position += new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow) && _object.transform.localPosition.y > -480)
             {
                 _object.transform.position -= new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow) && _object.transform.localPosition.x > -900)
             {
                 _object.transform.position -= new UnityEngine.Vector3(_speed, 0, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow) && _object.transform.localPosition.x < 900)
             {
                 _object.transform.position += new UnityEngine.Vector3(_speed, 0, 0);
             }
@@ -59,6 +59,7 @@ namespace Assets.Code
             return _object.transform.localPosition;
         }
 
+
         internal bool isHit(UnityEngine.Vector2 pos, float radius)
         {
             bool hit = false;
@@ -76,7 +77,8 @@ namespace Assets.Code
 
         internal void damage(int damage)
         {
-            //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ—
+            //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ— or “G‚É“–‚½‚Á‚½Û‚Ìˆ—
+            _object.SetActive(false);
         }
     }
 }
