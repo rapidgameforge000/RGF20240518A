@@ -8,7 +8,7 @@ namespace Assets.Code
         internal void initialize()
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("player");
-            UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab);
+            UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, SampleScene.Canvas.transform);
             _object = instance;
         }
 

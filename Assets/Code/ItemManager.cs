@@ -11,7 +11,7 @@ namespace Assets.Code
         internal void initialize( Player player )
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item_manager");
-            UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
+            UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab, SampleScene.Canvas.transform);
             _object = instance;
             _player = player;
         }
