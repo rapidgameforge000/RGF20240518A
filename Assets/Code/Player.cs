@@ -102,6 +102,12 @@ namespace Assets.Code
                 case Item.TYPE.PLAYER_SPEED_UP:
                     _speed += 5;
                     break;
+                case Item.TYPE.DIFFUSION:
+                    _bullet_type = BULLET_TYPE.DIFFUSION;
+                    break;
+                case Item.TYPE.POWER_UP:
+                    _bullet_damage += 3;
+                    break;
             }
         }
     }
