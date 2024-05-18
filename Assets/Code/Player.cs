@@ -41,7 +41,6 @@ namespace Assets.Code
             {
                 _bullet_mng.createBullet(
                     position: _object.transform.position,
-                    angle: 90,                      //’e‚Ì”­ËŠp“x
                     damage: 1,                      //’e‚Ìƒ_ƒ[ƒW—Ê
                     speed: 20f,                     //’e‚Ì‘¬“x
                     type: BULLET_TYPE.NORMAL,       //’e‚Ìí—Ş:’Êí’e or ŠgU’e

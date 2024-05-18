@@ -9,6 +9,8 @@ namespace Assets.Code
             MAX,
         };
 
+        const int SPEED = 2;
+
         private UnityEngine.GameObject _object;
         private TYPE _type;
         bool _alive;
@@ -34,6 +36,12 @@ namespace Assets.Code
 
             _object.transform.localPosition = pos;
             _alive = true;
+        }
+
+        internal void process() {
+            UnityEngine.Vector2 pos = _object.transform.localPosition;
+            pos += new UnityEngine.Vector2(SPEED, 0);
+            _object.transform.localPosition = pos;
         }
 
         internal TYPE getType() {

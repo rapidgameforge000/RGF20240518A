@@ -25,14 +25,43 @@ namespace Assets.Code
         }
 
         internal void process() {
-            //doHit();
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].process();
+            }
+
             doCleanUp();
         }
 
-        internal void create( UnityEngine.Vector2 pos ) {
+        internal void create(UnityEngine.Vector2 pos)
+        {
             Item item = new Item();
-            item.initialize( _object.transform, pos );
+            item.initialize(_object.transform, pos);
             _items.Add(item);
+        }
+
+        void doMove() {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (!_items[i].isAlive())
+                {
+                    _items[i].deleteObject();
+                    _items[i] = null;
+                }
+            }
+        }
+        private void doCleanUp()
+        {
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (!_items[i].isAlive())
+                {
+                    _items[i].deleteObject();
+                    _items[i] = null;
+                }
+            }
+
+            _items.RemoveAll(a => a == null);
         }
 
         //private void doHit( ) {
@@ -47,17 +76,5 @@ namespace Assets.Code
         //        }
         //    }       
         //}
-
-        private void doCleanUp() {
-            for (int i = 0; i < _items.Count; i++) {
-                if (!_items[i].isAlive())
-                {
-                    _items[i].deleteObject();
-                    _items[i] = null;
-                } 
-            }
-
-            _items.RemoveAll(a => a == null); 
-        }
     }
 }
