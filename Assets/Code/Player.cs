@@ -112,6 +112,9 @@ namespace Assets.Code
                 case Item.TYPE.POWER_UP:
                     _bullet_damage += 3;
                     break;
+                case Item.TYPE.HEEL:
+                    _hp += 5;
+                    break;
             }
             if (_bullet_speed > 40)
             {
