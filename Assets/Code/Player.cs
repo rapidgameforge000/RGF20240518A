@@ -88,10 +88,10 @@ namespace Assets.Code
         {
             switch(item.getType())
             {
-                case Item.TYPE.POWER_UP:
+                case Item.TYPE.BULLET_SPEED_UP:
                     _bullet_speed = 40f;
                     break;
-                case Item.TYPE.SPEED_UP:
+                case Item.TYPE.PLAYER_SPEED_UP:
                     _speed += 5;
                     break;
             }
