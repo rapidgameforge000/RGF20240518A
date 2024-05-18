@@ -18,5 +18,10 @@ namespace Assets.Code
         {
 
         }
+
+        internal void doHit(UnityEngine.Vector2 pos )
+        {
+
+        }
     }
 }
