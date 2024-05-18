@@ -1,6 +1,6 @@
 namespace Assets.Code
 {
-    public class Item : UnityEngine.MonoBehaviour
+    public class Item
     {
         private UnityEngine.GameObject _object;
         private const int SIZE = 50;
