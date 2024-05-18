@@ -9,12 +9,14 @@ namespace Assets.Code
             FALL,
             UP,
             ADULATION,
+            FORT,
             MAX,
         };
         const float ADD_X_VEL = 0.2f;
         const double START_HP = 5;
         const float SIZE = 40;
         const int CREATE_BULLET_TIME = 45;
+        const double APPEARANCE_SPEED = 0.5;
 
         ItemManager _item_manager;
         Player _player;
@@ -32,8 +34,8 @@ namespace Assets.Code
             _item_manager = item_manager;
             _player = player;
             _bullet_manager = bullet_manager;
-            //_type = TYPE.ADULATION;
-            _type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
+            _type = TYPE.FORT;
+            //_type = (TYPE)UnityEngine.Random.Range((int)TYPE.FALL, (int)TYPE.MAX);
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Enemy");
             UnityEngine.GameObject instance = UnityEngine.Object.Instantiate(prefab, SampleScene.Canvas.transform);
             _object = instance;
@@ -44,6 +46,9 @@ namespace Assets.Code
                     break;
                 case TYPE.UP:
                     initUpType();
+                    break;
+                case TYPE.FORT:
+                    initFortType();
                     break;
                 case TYPE.ADULATION:
                     initAdulationType();
@@ -74,6 +79,17 @@ namespace Assets.Code
             float pos_x = UnityEngine.Random.Range(min_x, max_x);
             float pos_y = -(540 + SIZE);
             _speed = (float)(2 + UnityEngine.Random.Range(5, 10));
+            UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
+            _object.transform.localPosition = pos;
+        }
+
+        private void initFortType()
+        {
+            float pos_x = (960 + SIZE);
+            float min_y = -(540 - SIZE);
+            float max_y = 540 - SIZE;
+            float pos_y = UnityEngine.Random.Range(min_y, max_y);
+            _speed = (float)APPEARANCE_SPEED;
             UnityEngine.Vector2 pos = new UnityEngine.Vector2(pos_x, pos_y);
             _object.transform.localPosition = pos;
         }
@@ -120,6 +136,9 @@ namespace Assets.Code
                 case TYPE.UP:
                     processUpType();
                     break;
+                case TYPE.FORT:
+                    processFortType();
+                    break;
                 case TYPE.ADULATION:
                     processAdulationType();
                     break;
@@ -153,6 +172,17 @@ namespace Assets.Code
             }
         }
 
+        private void processFortType()
+        {
+            UnityEngine.Vector2 pos = _object.transform.localPosition;
+            if (pos.x <= 960 - SIZE / 2)
+            {
+                return;
+            }
+            pos.x -= _speed;
+            _object.transform.localPosition = pos;
+        }
+
         private void processAdulationType()
         {
             UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
@@ -183,8 +213,7 @@ namespace Assets.Code
             _hp -= damage;
             if (_hp < 0)
             {
-                _isAlive = false;
-                _item_manager.create(_object.transform.localPosition);
+                processDestroy();
             }
         }
 
@@ -215,6 +244,12 @@ namespace Assets.Code
             UnityEngine.Vector2 vec = (player_pos - pos).normalized; // ベクトルを角度に変換します
             float angle = UnityEngine.Mathf.Atan2(vec.x, vec.y) * UnityEngine.Mathf.Rad2Deg;
             _bullet_manager.createBullet(_object.transform.position , angle, 1, 4, BULLET_TYPE.NORMAL, BULLET_FACTION.ENEMY);
+        }
+
+        private void processDestroy()
+        {
+            _isAlive = false;
+            _item_manager.create(_object.transform.localPosition);
         }
     }
 }
