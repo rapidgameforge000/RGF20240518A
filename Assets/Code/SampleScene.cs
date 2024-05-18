@@ -15,7 +15,7 @@ namespace Assets.Code
             _player = new Player();
             _player.initialize();
             _bullet_mgr = new BulletManager();
-            _bullet_mgr.initialize();
+            _bullet_mgr.initialize(_enemy_manager);
             _item_mgr = new ItemManager();
             _item_mgr.initialize();
         }
@@ -27,7 +27,7 @@ namespace Assets.Code
 
         private void doProcess()
         {
-            _enemy_manager.process();
+            //_enemy_manager.process();
             _bullet_mgr.process();
             _item_mgr.process();
             _player.process();
