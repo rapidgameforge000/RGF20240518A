@@ -16,18 +16,18 @@ namespace Assets.Code
 
         internal void process()
         {
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.W)) {
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.UpArrow)) {
                 _object.transform.position += new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.S))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.DownArrow))
             {
                 _object.transform.position -= new UnityEngine.Vector3(0, _speed, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.A))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow))
             {
                 _object.transform.position -= new UnityEngine.Vector3(_speed, 0, 0);
             }
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.D))
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow))
             {
                 _object.transform.position += new UnityEngine.Vector3(_speed, 0, 0);
             }
