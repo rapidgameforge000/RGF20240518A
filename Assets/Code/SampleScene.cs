@@ -27,7 +27,7 @@ namespace Assets.Code
 
         private void doProcess()
         {
-            //_enemy_manager.process();
+            _enemy_manager.process();
             _bullet_mgr.process();
             _item_mgr.process();
             _player.process();
