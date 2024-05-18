@@ -5,12 +5,13 @@ namespace Assets.Code
         internal enum TYPE
         {
             POWER_UP,
-            SPEED_UP,
+            BULLET_SPEED_UP,
+            PLAYER_SPEED_UP,
             DIFFUSION,
             MAX,
         };
 
-        const int SPEED = 2;
+        const int SPEED = 1;
 
         private UnityEngine.GameObject _object;
         private TYPE _type;
@@ -24,11 +25,14 @@ namespace Assets.Code
                     name = "item_power_up";
                     _type = TYPE.POWER_UP;
                     break;
-                case TYPE.SPEED_UP:
-                    name = "item_speed_up";
-                    _type = TYPE.SPEED_UP;
+                case TYPE.BULLET_SPEED_UP:
+                    name = "item_bullet_speed_up";
+                    _type = TYPE.BULLET_SPEED_UP;
                     break;
-
+                case TYPE.PLAYER_SPEED_UP:
+                    name = "item_player_speed_up";
+                    _type = TYPE.BULLET_SPEED_UP;
+                    break;
                 case TYPE.DIFFUSION:
                     name = "item_diffusion";
                     _type = TYPE.DIFFUSION;
@@ -46,7 +50,7 @@ namespace Assets.Code
 
         internal void process() {
             UnityEngine.Vector2 pos = _object.transform.localPosition;
-            pos += new UnityEngine.Vector2(SPEED, 0);
+            pos += new UnityEngine.Vector2(-SPEED, 0);
             _object.transform.localPosition = pos;
         }
 

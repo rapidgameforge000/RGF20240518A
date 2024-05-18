@@ -9,10 +9,12 @@ namespace Assets.Code
         UnityEngine.GameObject _object;
         BulletManager _bullet_mng;
 
+        private int _hp = 10;
         private float _speed = 10;
         private float _bullet_speed = 20f;
         private float _bullet_angle = 90;
-
+        private int _bullet_damage = 1;
+        private BULLET_TYPE _bullet_type = BULLET_TYPE.NORMAL;
         internal void initialize(BulletManager bulletManager)
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("player");
@@ -49,9 +51,9 @@ namespace Assets.Code
                 _bullet_mng.createBullet(
                     position: _object.transform.position,
                     angle: _bullet_angle,                      //’e‚Ì”­ËŠp“x
-                    damage: 1,                      //’e‚Ìƒ_ƒ[ƒW—Ê
+                    damage: _bullet_damage,                      //’e‚Ìƒ_ƒ[ƒW—Ê
                     speed: _bullet_speed,                     //’e‚Ì‘¬“x
-                    type: BULLET_TYPE.NORMAL,       //’e‚Ìí—Ş:’Êí’e or ŠgU’e
+                    type: _bullet_type,       //’e‚Ìí—Ş:’Êí’e or ŠgU’e
                     faction: BULLET_FACTION.PLAYER  //w‰c:Player or Enemy
                     );
             }
@@ -80,19 +82,35 @@ namespace Assets.Code
 
         internal void damage(int damage)
         {
+            _hp -= damage;
+            if (_hp > 0)
+            {
+                return;
+            }
             //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ— or “G‚É“–‚½‚Á‚½Û‚Ìˆ—
             _object.SetActive(false);
+        }
+
+        internal bool isDead()
+        {
+            return _hp <= 0;
         }
 
         internal void touchedItem(Item item)
         {
             switch(item.getType())
             {
-                case Item.TYPE.POWER_UP:
+                case Item.TYPE.BULLET_SPEED_UP:
                     _bullet_speed = 40f;
                     break;
-                case Item.TYPE.SPEED_UP:
+                case Item.TYPE.PLAYER_SPEED_UP:
                     _speed += 5;
+                    break;
+                case Item.TYPE.DIFFUSION:
+                    _bullet_type = BULLET_TYPE.DIFFUSION;
+                    break;
+                case Item.TYPE.POWER_UP:
+                    _bullet_damage += 3;
                     break;
             }
         }

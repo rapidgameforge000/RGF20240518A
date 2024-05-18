@@ -249,7 +249,7 @@ namespace Assets.Code
         private void processDestroy()
         {
             _isAlive = false;
-            _item_manager.create(_object.transform.localPosition);
+            _item_manager.doCreate(_object.transform.localPosition);
         }
     }
 }

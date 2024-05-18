@@ -8,8 +8,8 @@ namespace Assets.Code
         private Player _player;
         private List<Item> _items = new List<Item>();
 
-        private int PLAYER_RADIUS = 40;
-        private int ITEM_RADIUS = 20;
+        private const int ITEM_RADIUS = 40;
+        private const int PROBABILITY = 3;
 
         internal void initialize( Player player )
         {
@@ -18,10 +18,10 @@ namespace Assets.Code
             _object = instance;
             _player = player;
 
-            for (int i = 0; i < 10; i++)
-            {
-                create(new UnityEngine.Vector2(UnityEngine.Random.Range(-300, 300), UnityEngine.Random.Range(-300, 300)));
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    doCreate(new UnityEngine.Vector2(UnityEngine.Random.Range(-300, 300), UnityEngine.Random.Range(-300, 300)));
+            //}
         }
 
         internal void process() {
@@ -33,8 +33,11 @@ namespace Assets.Code
             doCleanUp();
         }
 
-        internal void create(UnityEngine.Vector2 pos)
+        internal void doCreate(UnityEngine.Vector2 pos)
         {
+            if (UnityEngine.Random.Range(0, PROBABILITY) != 0) {
+                return;
+            }
             Item item = new Item();
             item.initialize(_object.transform, pos);
             _items.Add(item);
