@@ -1,4 +1,4 @@
-namespace Assets.Code.Item
+namespace Assets.Code
 {
     public class Item : UnityEngine.MonoBehaviour
     {

@@ -4,6 +4,7 @@ namespace Assets.Code
     {
         Enemy _enemy;
         BulletManager _bullet_mgr;
+        ItemManager _item_mgr;
         Player _player;
         private void Awake()
         {
@@ -15,6 +16,8 @@ namespace Assets.Code
             _player.initialize();
             _bullet_mgr = new BulletManager();
             _bullet_mgr.initialize();
+            _item_mgr = new ItemManager();
+            _item_mgr.initialize();
         }
 
         private void Update()
