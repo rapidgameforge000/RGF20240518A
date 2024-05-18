@@ -184,7 +184,7 @@ namespace Assets.Code
             if (_hp < 0)
             {
                 _isAlive = false;
-                _item_manager.create(_object.transform.localPosition);
+                _item_manager.doCreate(_object.transform.localPosition);
             }
         }
 
