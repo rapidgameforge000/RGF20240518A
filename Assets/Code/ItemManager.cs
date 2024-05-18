@@ -2,30 +2,34 @@ using System.Collections.Generic;
 
 namespace Assets.Code
 {
-    public class ItemManager : UnityEngine.MonoBehaviour
+    internal class ItemManager : UnityEngine.MonoBehaviour
     {
         private UnityEngine.GameObject _object;
-        List<Item> items = new List<Item>();
+        private Player _player;
+        private List<Item> items = new List<Item>();
 
-        public void initialize()
+        internal void initialize( Player player )
         {
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item_manager");
             UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
             _object = instance;
+            _player = player;
         }
 
-        public void process() {
+        internal void process() {
             doHit();
         }
 
-        public void create( UnityEngine.Vector2 pos ) {
+        internal void create( UnityEngine.Vector2 pos ) {
             Item item = new Item();
             item.initialize( _object.transform, pos );
             items.Add(item);
         }
 
-        private void doHit( ) { 
-            
+        private void doHit( ) {
+            for (int i = 0; i < items.Count; i++) { 
+                
+            }  
         }
     }
 }

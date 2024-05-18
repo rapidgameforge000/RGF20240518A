@@ -17,7 +17,7 @@ namespace Assets.Code
             _bullet_mgr = new BulletManager();
             _bullet_mgr.initialize();
             _item_mgr = new ItemManager();
-            _item_mgr.initialize();
+            _item_mgr.initialize( _player );
         }
 
         private void Update()
