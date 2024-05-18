@@ -16,14 +16,33 @@ namespace Assets.Code
 
         internal void process()
         {
-
+            doCleanUp();
         }
 
-        internal bool doHit(UnityEngine.Vector2 pos, int damage)
+        private void doCleanUp()
+        {
+            for(int i = ~0; i < _enemys.Count; i++)
+            {
+                if (_enemys[i].isAlive())
+                {
+                    _enemys[i] = null;
+                    _enemys[i].deleteObject();
+                }
+            }
+            _enemys.RemoveAll(a => a == null);
+        }
+
+        internal bool doHit(UnityEngine.Vector2 pos, double damage)
         {
             bool hit = false; ;
             for (int i = 0; i < _enemys.Count; i++)
             {
+                if (_enemys[i].isHit(pos))
+                {
+                    _enemys[i].hit(damage);
+                    hit = true;
+                    break;
+                }
             }
             return hit;
         }
