@@ -9,10 +9,9 @@ namespace Assets.Code
             MAX,
         };
 
-        private const int SIZE = 40;
-
         private UnityEngine.GameObject _object;
         private TYPE _type;
+        bool _alive;
 
         internal void initialize( UnityEngine.Transform transform, UnityEngine.Vector2 pos )
         {
@@ -31,12 +30,30 @@ namespace Assets.Code
             UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>( name );
             UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate( prefab, SampleScene.Canvas.transform );
             _object = instance;
+            
 
             _object.transform.localPosition = pos;
+            _alive = true;
         }
 
         internal TYPE getType() {
             return _type;
+        }
+
+        internal UnityEngine.Vector2 getPosition() { 
+            return _object.transform.localPosition;
+        }
+
+        internal void death() {
+            _alive = false;
+        }
+
+        internal void deleteObject() {
+            UnityEngine.GameObject.Destroy(_object);
+        }
+
+        internal bool isAlive() {
+            return _alive;
         }
     }
 }
