@@ -4,12 +4,15 @@ namespace Assets.Code
     {
         private UnityEngine.GameObject _prefab = null;
         private System.Collections.Generic.List<Bullet> _bullets = new System.Collections.Generic.List<Bullet>();
-        internal void initialize()
+        private EnemyManager _enemy_mgr = null;
+
+        internal void initialize(EnemyManager enemy_mgr)
         {
+            _enemy_mgr = enemy_mgr;
             _prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Bullet");
 
             //Test Code
-            createBullet(UnityEngine.Vector3.zero, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), 10);
+            createBullet(UnityEngine.Vector3.zero);
         }
 
         internal void process()
@@ -17,12 +20,20 @@ namespace Assets.Code
             for (int i = 0; i < _bullets.Count; i++)
             {
                 _bullets[i].process();
+                if (_enemy_mgr.doHit(_bullets[i].getPosition2d(), _bullets[i].getDamage()))
+                {
+                    _bullets[i].destroy();
+                    _bullets.Remove(_bullets[i]);
+                    i--;
+                }
             }
         }
 
-        internal void createBullet(UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, float speed)
+        internal void createBullet(UnityEngine.Vector3 position)
         {
-            _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, rotation), speed));
+            float speed = 10;
+            int damage = 1;
+            _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward)), speed, damage));
         }
     }
 }
