@@ -2,13 +2,13 @@ namespace Assets.Code
 {
     internal class SampleScene : UnityEngine.MonoBehaviour
     {
-        Enemy _enemy;
+        EnemyManager _enemy_manager;
         private void Awake()
         {
             UnityEngine.QualitySettings.vSyncCount = 0;
             UnityEngine.Application.targetFrameRate = 30;
-            _enemy= new Enemy();
-            _enemy.initialize();
+            _enemy_manager = new EnemyManager();
+            _enemy_manager.initialize();
         }
 
         private void Update()
@@ -18,7 +18,7 @@ namespace Assets.Code
 
         private void doProcess()
         {
-            _enemy.process();
+            _enemy_manager.process();
         }
     }
 }
