@@ -79,5 +79,18 @@ namespace Assets.Code
             //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ— or “G‚É“–‚½‚Á‚½Û‚Ìˆ—
             _object.SetActive(false);
         }
+
+        internal void touchedItem(Item item)
+        {
+            switch(item.getType())
+            {
+                case Item.TYPE.POWER_UP:
+
+                    break;
+                case Item.TYPE.SPEED_UP:
+                    _speed += 5;
+                    break;
+            }
+        }
     }
 }
