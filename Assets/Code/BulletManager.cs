@@ -10,9 +10,6 @@ namespace Assets.Code
         {
             _enemy_mgr = enemy_mgr;
             _prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Bullet");
-
-            //Test Code
-            createBullet(UnityEngine.Vector3.zero);
         }
 
         internal void process()
@@ -33,7 +30,7 @@ namespace Assets.Code
         {
             float speed = 10;
             int damage = 1;
-            _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward)), speed, damage));
+            _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage));
         }
     }
 }
