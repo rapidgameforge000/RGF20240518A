@@ -26,7 +26,7 @@ namespace Assets.Code
             }
         }
 
-        internal void createBullet(UnityEngine.Vector3 position, int damage = 1, float speed = 10)
+        internal void createBullet(UnityEngine.Vector3 position, int damage = 1, float speed = 20)
         {
             _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage));
         }
