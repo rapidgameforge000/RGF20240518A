@@ -34,7 +34,7 @@ namespace Assets.Code
         }
         internal UnityEngine.Vector2 getPosition2d()
         {
-            return new UnityEngine.Vector2(_gobj.transform.position.x, _gobj.transform.position.y);
+            return _gobj.transform.localPosition;
         }
     }
 }
