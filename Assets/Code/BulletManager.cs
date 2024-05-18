@@ -26,9 +26,20 @@ namespace Assets.Code
             }
         }
 
-        internal void createBullet(UnityEngine.Vector3 position, int damage = 1, float speed = 20)
+        internal void createBullet(UnityEngine.Vector3 position, int damage = 1, float speed = 20, BULLET_TYPE type = BULLET_TYPE.NORMAL)
         {
-            _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage));
+            switch (type)
+            {
+                case BULLET_TYPE.NORMAL:
+                    _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage));
+                    break;
+                case BULLET_TYPE.DIFFUSION:
+                    for (int i = 0; i < 5; i++)
+                    {
+                        _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-110 + i * 10, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage));
+                    }
+                    break;
+            }
         }
     }
 }
