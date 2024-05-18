@@ -14,6 +14,7 @@ namespace Assets.Code
         const float ADD_X_VEL = 0.2f;
         const double START_HP = 5;
         const float SIZE = 40;
+        const int CREATE_BULLET_TIME = 45;
 
         ItemManager _item_manager;
         Player _player;
@@ -108,6 +109,9 @@ namespace Assets.Code
 
         internal void process()
         {
+            if (isCreateBullet()){
+                createBullet();
+            }
             switch (_type)
             {
                 case TYPE.FALL:
@@ -120,7 +124,7 @@ namespace Assets.Code
                     processAdulationType();
                     break;
             }
-            _frame_cont = 0;
+            _frame_cont++;
         }
 
         private void processFallType()
@@ -194,5 +198,23 @@ namespace Assets.Code
             UnityEngine.Object.Destroy(_object);
         }
 
+        private bool isCreateBullet()
+        {
+            bool create = false;
+            if (_frame_cont % CREATE_BULLET_TIME == 0)
+            {
+                create = true;
+            }
+            return create;
+        }
+
+        private void createBullet()
+        {
+            UnityEngine.Vector2 player_pos = _player.GetPlayerPosition();
+            UnityEngine.Vector2 pos = _object.transform.localPosition;
+            UnityEngine.Vector2 vec = (player_pos - pos).normalized; // ベクトルを角度に変換します
+            float angle = UnityEngine.Mathf.Atan2(vec.x, vec.y) * UnityEngine.Mathf.Rad2Deg;
+            _bullet_manager.createBullet(_object.transform.position , angle, 1, 4, BULLET_TYPE.NORMAL, BULLET_FACTION.ENEMY);
+        }
     }
 }
