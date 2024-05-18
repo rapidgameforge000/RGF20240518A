@@ -3,6 +3,7 @@ namespace Assets.Code
     internal class SampleScene : UnityEngine.MonoBehaviour
     {
         Enemy _enemy;
+        BulletManager _bullet_mgr;
         Player _player;
         private void Awake()
         {
@@ -12,6 +13,8 @@ namespace Assets.Code
             _enemy.initialize();
             _player = new Player();
             _player.initialize();
+            _bullet_mgr = new BulletManager();
+            _bullet_mgr.initialize();
         }
 
         private void Update()
@@ -22,6 +25,7 @@ namespace Assets.Code
         private void doProcess()
         {
             _enemy.process();
+            _bullet_mgr.process();
             _player.process();
         }
     }

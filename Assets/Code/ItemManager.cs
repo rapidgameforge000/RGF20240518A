@@ -1,16 +1,17 @@
+using System.Collections.Generic;
+
 namespace Assets.Code.Item
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-
-    public class ItemManager : MonoBehaviour
+    public class ItemManager : UnityEngine.MonoBehaviour
     {
         private UnityEngine.GameObject _object;
+        List<Item> items = new List<Item>();
 
         public void initialize()
         {
-
+            UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item");
+            UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
+            _object = instance;
         }
     }
 }

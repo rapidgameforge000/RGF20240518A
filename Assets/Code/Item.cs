@@ -6,7 +6,9 @@ namespace Assets.Code.Item
         private const int SIZE = 50;
         public void initialize()
         {
-           
+            UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>( "item" );
+            UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
+            _object = instance;
         }
 
         public int getSize()
