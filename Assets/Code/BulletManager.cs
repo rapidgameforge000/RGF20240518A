@@ -7,6 +7,9 @@ namespace Assets.Code
         internal void initialize()
         {
             _prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Bullet");
+
+            //Test Code
+            createBullet(UnityEngine.Vector3.zero, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), 10);
         }
 
         internal void process()
