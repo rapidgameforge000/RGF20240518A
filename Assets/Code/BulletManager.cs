@@ -41,17 +41,17 @@ namespace Assets.Code
             }
         }
 
-        internal void createBullet(UnityEngine.Vector3 position, int damage, float speed, BULLET_TYPE type, BULLET_FACTION faction)
+        internal void createBullet(UnityEngine.Vector3 position, float angle, int damage, float speed, BULLET_TYPE type, BULLET_FACTION faction)
         {
             switch (type)
             {
                 case BULLET_TYPE.NORMAL:
-                    _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-90, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage, faction));
+                    _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction));
                     break;
                 case BULLET_TYPE.DIFFUSION:
                     for (int i = 0; i < 5; i++)
                     {
-                        _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(-110 + i * 10, UnityEngine.Vector3.forward), SampleScene.Canvas.transform), speed, damage, faction));
+                        _bullets.Add(new Bullet(UnityEngine.GameObject.Instantiate<UnityEngine.GameObject>(_prefab, position, UnityEngine.Quaternion.AngleAxis(angle - 20 + i * 10, UnityEngine.Vector3.back), SampleScene.Canvas.transform), speed, damage, faction));
                     }
                     break;
             }
