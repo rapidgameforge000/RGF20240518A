@@ -1,7 +1,11 @@
+using System.Drawing;
+
 namespace Assets.Code
 {
     internal class Player
     {
+        const int SIZE = 80;
+
         UnityEngine.GameObject _object;
         private float _speed = 10;
         BulletManager _bullet_mng;
@@ -53,6 +57,26 @@ namespace Assets.Code
         internal UnityEngine.Vector2 GetPlayerPosition()
         {
             return _object.transform.localPosition;
+        }
+
+        internal bool isHit(UnityEngine.Vector2 pos, float radius)
+        {
+            bool hit = false;
+            UnityEngine.Vector2 my_pos = _object.transform.localPosition;
+            UnityEngine.Vector2 distance = pos - my_pos;
+            float hit_range = SIZE + radius;
+            float sqr_distance = distance.sqrMagnitude;
+            float sqr_hit_distance = hit_range * hit_range;
+            if (sqr_distance < sqr_hit_distance)
+            {
+                hit = true;
+            }
+            return hit;
+        }
+
+        internal void damage(int damage)
+        {
+            //“G‚Ì’e‚ª“–‚½‚Á‚½Û‚Ìˆ—
         }
     }
 }
