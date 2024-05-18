@@ -16,12 +16,12 @@ namespace Assets.Code
 
         internal void process()
         {
-            doCleanUp();
+            //doCleanUp();
         }
 
         private void doCleanUp()
         {
-            for(int i = ~0; i < _enemys.Count; i++)
+            for(int i = 0; i < _enemys.Count; i++)
             {
                 if (_enemys[i].isAlive())
                 {
