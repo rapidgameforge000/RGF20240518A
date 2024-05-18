@@ -4,6 +4,7 @@ namespace Assets.Code
     {
         Enemy _enemy;
         BulletManager _bullet_mgr;
+        ItemManager _item_mgr;
         private void Awake()
         {
             UnityEngine.QualitySettings.vSyncCount = 0;
@@ -12,6 +13,8 @@ namespace Assets.Code
             _enemy.initialize();
             _bullet_mgr = new BulletManager();
             _bullet_mgr.initialize();
+            _item_mgr = new ItemManager();
+            _item_mgr.initialize();
         }
 
         private void Update()
