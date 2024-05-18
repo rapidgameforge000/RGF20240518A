@@ -1,16 +1,21 @@
-namespace Assets.Code.Item
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+using System.Collections.Generic;
 
-    public class ItemManager : MonoBehaviour
+namespace Assets.Code
+{
+    public class ItemManager : UnityEngine.MonoBehaviour
     {
         private UnityEngine.GameObject _object;
+        List<Item> items = new List<Item>();
 
         public void initialize()
         {
+            UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("item_manager");
+            UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
+            _object = instance;
 
-        }
+            Item item = new Item();
+            item.initialize();
+            items.Add(item);
+        } 
     }
 }
